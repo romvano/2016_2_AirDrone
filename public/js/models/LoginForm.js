@@ -2,9 +2,9 @@
     'use strict';
 
     class LoginForm {
-        constructor () {
-            console.log('LoginForm constructor');
 
+        constructor () {
+            let self = this;
             this.el = document.createElement('div');
             this.el.classList.add('main__login');
     
@@ -15,7 +15,7 @@
     
             let form = document.createElement('form');
             form.classList.add('main__login__form');
-            form.onSubmit = function() { this.login(); return 0; };
+            form.onsubmit = function() { self.login(); return 0; };
             form.method = 'POST';
 
             let emailError = document.createElement('p');
@@ -43,10 +43,18 @@
             let submit = document.createElement('button');
             submit.classList.add('main__login__form__button', 'js-submit');
             submit.innerHTML = 'Войти!';
-    
+
+            let registrationLink = document.createElement('div');
+            registrationLink.classList.add('main__login__form__link');
+            registrationLink.onclick = function() { console.log('click'); hideLogin(); showRegistration(); return 0;};
+            registrationLink.innerHTML = 'Регистрация';
+
+            form.appendChild(emailError);
             form.appendChild(email);
+            form.appendChild(passwordError);
             form.appendChild(password);
             form.appendChild(submit);
+            form.appendChild(registrationLink);
             this.el.appendChild(form);
             document.querySelector('.main').appendChild(this.el);
         }
@@ -68,14 +76,15 @@
         }
 
         login () {
-            if (!this.validate()) {
+            if (!this.validate) {
                 return;
             }
             let data = {
                 email: document.querySelector('.js-email').value,
-                password: document.querySelector('js-password').value,
-            }
-            let response = request('/session', data);
+                password: document.querySelector('.js-password').value,
+            };
+            let response = request('/session', 'POST', data);
+            console.log(response);
         }
 
     }
