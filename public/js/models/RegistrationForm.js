@@ -16,8 +16,8 @@
     
             let form = document.createElement('form');
             form.classList.add('main__login__form');
-            form.onsubmit = function() { self.nextStep(); return 0; };
-            form.method = 'POST';
+            form.onsubmit = function() { self.nextStep(); return false; };
+//            form.method = 'POST';
 
             let emailError = document.createElement('p');
             emailError.classList.add('main__login__form__error', 'js-email-error');
@@ -94,8 +94,8 @@
     
             let form = document.createElement('form');
             form.classList.add('main__login__form');
-            form.onsubmit = function() { self.register(); return 0; };
-            form.method = 'POST';
+            form.onsubmit = function() { self.register(); return false; };
+//            form.method = 'POST';
 
             let loginError = document.createElement('p');
             loginError.classList.add('main__login__form__error', 'js-login-error');
