@@ -2,7 +2,7 @@ module.exports = {
     "swagger": "2.0",
     "info": {
         "title": "AirControl API",
-        "description": "Призван дать возможность управлять Вашим квадрокоптером через интернет",
+        "description": "Control your Quadcopter with AirControl API",
         "version": "1.0.0"
     },
     "host": "api.copterapi.com",
@@ -16,8 +16,8 @@ module.exports = {
     "paths": {
         "/user": {
             "get": {
-                "summary": "Информация о пользователе",
-                "description": "Выдает информацию о текущем залогиненном пользователе по текущему ID сессии",
+                "summary": "Get user's info",
+                "description": "",
                 "parameters": [
                                {
                                "name": "sessionID",
@@ -28,11 +28,11 @@ module.exports = {
                                }
                                ],
                 "tags": [
-                         "Пользователь"
+                         "Users"
                          ],
                 "responses": {
                     "200": {
-                        "description": "Пользовательская информация",
+                        "description": "User's info",
                         "schema": {
                             "type": "array",
                             "items": {
@@ -41,15 +41,15 @@ module.exports = {
                         }
                     },
                     "401": {
-                        "description": "Вы не авторизованы"
+                        "description": "Unauthorized"
                     }
                 }
             },
             "post": {
                 "tags": [
-                         "Пользователь"
+                         "Users"
                          ],
-                "summary": "Добавление нового пользователя",
+                "summary": "Add new User",
                 "description": "",
                 "consumes": [
                              "application/json"
@@ -61,7 +61,7 @@ module.exports = {
                                {
                                "in": "body",
                                "name": "body",
-                               "description": "Отправка на сервер даннх о новом пользователе, которого нужно внести в Базу Данных",
+                               "description": "User object that needs to be added to the Data Base",
                                "required": true,
                                "schema": {
                                "$ref": "#/definitions/User"
@@ -79,16 +79,16 @@ module.exports = {
                         }
                     },
                     "405": {
-                        "description": "Неверные данные"
+                        "description": "Invalid input"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                         "Пользователь"
+                         "Users"
                          ],
-                "summary": "Удаление пользователя",
-                "description": "Удаление пользователя из Базы Данных. Подтверждается вводом логина и пароля на клиентской стороне.",
+                "summary": "Add new User",
+                "description": "",
                 "consumes": [
                              "application/json"
                              ],
@@ -99,7 +99,7 @@ module.exports = {
                                {
                                "in": "body",
                                "name": "body",
-                               "description": "Объект пользователя вместе с ID сессией",
+                               "description": "User object that needs to deleted from the Data Base",
                                "required": true,
                                "schema": {
                                "$ref": "#/definitions/DeleteUser"
@@ -111,15 +111,15 @@ module.exports = {
                         "description": "OK"
                     },
                     "403": {
-                        "description": "Запрещено"
+                        "description": "Forbidden"
                     }
                 }
             },
             "put": {
                 "tags": [
-                         "Пользователь"
+                         "Users"
                          ],
-                "summary": "Изменение пользовательских данных",
+                "summary": "Set User's data",
                 "description": "",
                 "consumes": [
                              "application/json"
@@ -131,7 +131,7 @@ module.exports = {
                                {
                                "in": "body",
                                "name": "body",
-                               "description": "ID сессии пользователя, чьи данные должны быть изменены",
+                               "description": "ID of user's session to change his data",
                                "required": true,
                                "schema": {
                                "$ref": "#/definitions/Session"
@@ -143,21 +143,21 @@ module.exports = {
                         "description": "OK"
                     },
                     "403": {
-                        "description": "Запрещено"
+                        "description": "Forbidden"
                     }
                 }
             }
         },
         "/session": {
             "get": {
-                "summary": "Получение сессии пользователя",
+                "summary": "Get session for user",
                 "description": "",
                 "tags": [
-                         "Сессия"
+                         "Session"
                          ],
                 "responses": {
                     "200": {
-                        "description": "Текущий ID сессии",
+                        "description": "Current session ID",
                         "schema": {
                             "type": "array",
                             "items": {
@@ -166,15 +166,15 @@ module.exports = {
                         }
                     },
                     "401": {
-                        "description": "Вы не авторизованы"
+                        "description": "Unauthorized"
                     }
                 }
             },
             "post": {
                 "tags": [
-                         "Сессия"
+                         "Session"
                          ],
-                "summary": "Метод авторизации",
+                "summary": "User login method",
                 "description": "",
                 "consumes": [
                              "application/json"
@@ -186,7 +186,7 @@ module.exports = {
                                {
                                "in": "body",
                                "name": "body",
-                               "description": "Объект пользователя для авторизации",
+                               "description": "User object that needs to be added to the Data Base",
                                "required": true,
                                "schema": {
                                "$ref": "#/definitions/User"
@@ -204,16 +204,16 @@ module.exports = {
                         }
                     },
                     "405": {
-                        "description": "Неверные данные"
+                        "description": "Invalid input"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                         "Сессия"
+                         "Session"
                          ],
-                "summary": "Очистка сессии",
-                "description": "Метод для выхода пользователя из системы",
+                "summary": "User login method",
+                "description": "",
                 "consumes": [
                              "application/json"
                              ],
@@ -224,7 +224,7 @@ module.exports = {
                                {
                                "in": "body",
                                "name": "body",
-                               "description": "Сессия, которая должна быть удалена",
+                               "description": "User object that needs to be added to the Data Base",
                                "required": true,
                                "schema": {
                                "$ref": "#/definitions/Session"
@@ -236,7 +236,7 @@ module.exports = {
                         "description": "OK"
                     },
                     "400": {
-                        "description": "Ошибка запроса"
+                        "description": "Bad request"
                     }
                 }
             }
