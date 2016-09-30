@@ -21,7 +21,7 @@ app.post('/user', (req, res) => {
          });
 
 app.post('/session', (req, res) => {
-         technolibs.publish(req.body).then(body => res.json(req.body));
+         res.send(String('Добро пожаловать, пользователь!'));
          });
 
 app.get('/api/messages', function (req, res) {

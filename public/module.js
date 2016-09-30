@@ -6,7 +6,7 @@
 	class Animal {
 		constructor (options) {
 			this.name = options.name;
-			console.log('Creating new instance!');
+			console.log('Creating new instance!';
 		}
 
 		sayHello () {
