@@ -1,0 +1,20 @@
+.body-login {
+    background-image: url("/image/login_background.jpg");
+    background-position: center -25vh;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.main__login {
+    width: 25%;
+    min-width: 200px;
+    height: 80%;
+    min-height: 400px;
+    background-color: #f0f0f0;
+    border-radius: 17px;
+    margin-top: 20vh;
+    margin-left: 10%;
+    border: solid 1px #ddd; 
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
