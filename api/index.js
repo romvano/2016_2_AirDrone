@@ -27,7 +27,7 @@ module.exports = {
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Email"
+                                "$ref": "#/definitions/EmailUsername"
                             }
                         }
                     },
@@ -63,8 +63,11 @@ module.exports = {
                     "200": {
                         "description": "OK"
                     },
-                    "405": {
-                        "description": "Invalid input"
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     }
                 }
             },
@@ -161,8 +164,11 @@ module.exports = {
                     "200": {
                         "description": "OK"
                     },
-                    "405": {
-                        "description": "Invalid input"
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     }
                 }
             },
@@ -182,8 +188,8 @@ module.exports = {
                     "200": {
                         "description": "OK"
                     },
-                    "400": {
-                        "description": "Bad access"
+                    "401": {
+                        "description": "Unauthorized"
                     }
                 }
             }
@@ -215,10 +221,13 @@ module.exports = {
                 }
             }
         },
-        "Email": {
+        "EmailUsername": {
             "type": "object",
             "properties": {
                 "email": {
+                    "type": "string"
+                },
+                "username": {
                     "type": "string"
                 }
             }
