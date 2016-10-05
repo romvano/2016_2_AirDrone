@@ -5,11 +5,11 @@ module.exports = {
         "description": "Призван дать возможность управлять Вашим квадрокоптером через интернет",
         "version": "1.0.0"
     },
-    "host": "api.copterapi.com",
+    "host": "air-drone.herokuapp.com",
     "schemes": [
                 "https"
                 ],
-    "basePath": "/v1",
+    "basePath": "/",
     "produces": [
                  "application/json"
                  ],
@@ -17,16 +17,7 @@ module.exports = {
         "/user": {
             "get": {
                 "summary": "Информация о пользователе",
-                "description": "Выдает информацию о текущем залогиненном пользователе по текущему ID сессии",
-                "parameters": [
-                               {
-                               "name": "sessionID",
-                               "in": "query",
-                               "description": "ID of current session",
-                               "required": true,
-                               "type": "string"
-                               }
-                               ],
+                "description": "Выдает информацию о залогиненном пользователе",
                 "tags": [
                          "Пользователь"
                          ],
@@ -36,12 +27,12 @@ module.exports = {
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/User"
+                                "$ref": "#/definitions/EmailUsername"
                             }
                         }
                     },
                     "401": {
-                        "description": "Вы не авторизованы"
+                        "description": "Unauthorized"
                     }
                 }
             },
@@ -70,16 +61,13 @@ module.exports = {
                                ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Session"
-                            }
-                        }
+                        "description": "OK"
                     },
-                    "405": {
-                        "description": "Неверные данные"
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     }
                 }
             },
@@ -99,10 +87,10 @@ module.exports = {
                                {
                                "in": "body",
                                "name": "body",
-                               "description": "Объект пользователя вместе с ID сессией",
+                               "description": "Объект пользователя",
                                "required": true,
                                "schema": {
-                               "$ref": "#/definitions/DeleteUser"
+                               "$ref": "#/definitions/LoginPassword"
                                }
                                }
                                ],
@@ -111,7 +99,7 @@ module.exports = {
                         "description": "OK"
                     },
                     "403": {
-                        "description": "Запрещено"
+                        "description": "Forbidden"
                     }
                 }
             },
@@ -131,10 +119,10 @@ module.exports = {
                                {
                                "in": "body",
                                "name": "body",
-                               "description": "ID сессии пользователя, чьи данные должны быть изменены",
+                               "description": "Объект с новыми и старыми данными пользователя",
                                "required": true,
                                "schema": {
-                               "$ref": "#/definitions/Session"
+                               "$ref": "#/definitions/PutUserRequest"
                                }
                                }
                                ],
@@ -143,33 +131,12 @@ module.exports = {
                         "description": "OK"
                     },
                     "403": {
-                        "description": "Запрещено"
+                        "description": "Forbidden"
                     }
                 }
             }
         },
         "/session": {
-            "get": {
-                "summary": "Получение сессии пользователя",
-                "description": "",
-                "tags": [
-                         "Сессия"
-                         ],
-                "responses": {
-                    "200": {
-                        "description": "Текущий ID сессии",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Session"
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Вы не авторизованы"
-                    }
-                }
-            },
             "post": {
                 "tags": [
                          "Сессия"
@@ -189,22 +156,19 @@ module.exports = {
                                "description": "Объект пользователя для авторизации",
                                "required": true,
                                "schema": {
-                               "$ref": "#/definitions/User"
+                               "$ref": "#/definitions/LoginPassword"
                                }
                                }
                                ],
                 "responses": {
                     "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Session"
-                            }
-                        }
+                        "description": "OK"
                     },
-                    "405": {
-                        "description": "Неверные данные"
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     }
                 }
             },
@@ -220,29 +184,29 @@ module.exports = {
                 "produces": [
                              "application/json"
                              ],
-                "parameters": [
-                               {
-                               "in": "body",
-                               "name": "body",
-                               "description": "Сессия, которая должна быть удалена",
-                               "required": true,
-                               "schema": {
-                               "$ref": "#/definitions/Session"
-                               }
-                               }
-                               ],
                 "responses": {
                     "200": {
                         "description": "OK"
                     },
-                    "400": {
-                        "description": "Ошибка запроса"
+                    "401": {
+                        "description": "Unauthorized"
                     }
                 }
             }
         }
     },
     "definitions": {
+        "LoginPassword": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
         "User": {
             "type": "object",
             "properties": {
@@ -257,24 +221,30 @@ module.exports = {
                 }
             }
         },
-        "Session": {
+        "EmailUsername": {
             "type": "object",
             "properties": {
-                "sessionID": {
+                "email": {
+                    "type": "string"
+                },
+                "username": {
                     "type": "string"
                 }
             }
         },
-        "DeleteUser": {
+        "PutUserRequest": {
             "type": "object",
             "properties": {
+                "username": {
+                    "type": "string"
+                },
                 "password": {
                     "type": "string"
                 },
-                "email": {
+                "newPassword": {
                     "type": "string"
                 },
-                "sessionID": {
+                "email": {
                     "type": "string"
                 }
             }
