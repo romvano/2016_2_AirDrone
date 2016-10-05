@@ -16,7 +16,6 @@
             let form = document.createElement('form');
             form.classList.add('main__login__form');
             form.onsubmit = function() { self.login(); return 0; };
-            form.method = 'POST';
 
             let emailError = document.createElement('p');
             emailError.classList.add('main__login__form__error', 'js-email-error');
@@ -84,7 +83,7 @@
                 password: document.querySelector('.js-password').value,
             };
             let response = request('/session', 'POST', data);
-            console.log(response);
+            alert(response);
         }
 
     }
