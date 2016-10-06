@@ -134,7 +134,7 @@
                 return;
             }
             registrationData.username = document.querySelector('.js-login').value;
-            let response = request('/user', 'POST', registrationData);
+            let response = request('https://air-drone.herokuapp.com/user', 'POST', registrationData);
             alert(response);
         }
     }
