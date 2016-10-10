@@ -97,12 +97,13 @@
         }
 
         login () {
-            if (!this.validate) {
+            let self = this;
+            if (!self.validate) {
                 return;
             }
             let data = {
-                email: document.querySelector('.js-email').value,
-                password: document.querySelector('.js-password').value,
+                email: self.email.value,
+                password: self.password.value,
             };
             let response = request('https://air-drone.herokuapp.com/session', 'POST', data);
             alert(response);
