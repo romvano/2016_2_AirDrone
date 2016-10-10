@@ -6,12 +6,9 @@
         constructor () {
             let self = this;
 
-            self.el = document.createElement('div');
-            self.el.classList.add('login');
-    
-            self.form = document.createElement('form');
-            self.form.classList.add('login__form');
-            self.form.onsubmit = function() { self.login(); return 0; };
+            self.el = document.createElement('form');
+            self.el.classList.add('login__form');
+            self.el.onsubmit = function() { self.login(); return 0; };
 
             self.h1 = new Header({
                 text: 'Вход',
@@ -61,17 +58,21 @@
 
             self.registrationLink = document.createElement('div');
             self.registrationLink.classList.add('login__form__link');
-            self.registrationLink.onclick = function() { console.log('click'); hideLogin(); showRegistration(); return 0;};
+            self.registrationLink.onclick = function() {
+                console.log('click');
+                hideLogin();
+                showRegistration();
+                return 0;
+            };
             self.registrationLink.innerHTML = 'Регистрация';
 
-            self.form.appendChild(self.h1.render());
-            self.form.appendChild(self.emailError.render());
-            self.form.appendChild(self.email.render());
-            self.form.appendChild(self.passwordError.render());
-            self.form.appendChild(self.password.render());
-            self.form.appendChild(self.submit.render());
-            self.form.appendChild(self.registrationLink);
-            this.el.appendChild(self.form);
+            self.el.appendChild(self.h1.render());
+            self.el.appendChild(self.emailError.render());
+            self.el.appendChild(self.email.render());
+            self.el.appendChild(self.passwordError.render());
+            self.el.appendChild(self.password.render());
+            self.el.appendChild(self.submit.render());
+            self.el.appendChild(self.registrationLink);
         }
 
         render () {
