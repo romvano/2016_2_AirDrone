@@ -7,13 +7,14 @@
       document.body.classList.add('body-login'); // background image
       const loginForm = new LoginForm();
       loginContainer = document.querySelector('.login');
-      loginContainer.innerHTML = loginForm.render();
+      loginContainer.appendChild(loginForm.render());
       loginContainer.style.display = 'inline';
     }
   }
 
   function hideLogin() {
     document.body.classList.remove('body-login'); // bg image
+    loginContainer.innerHTML = '';
     loginContainer.setAttribute('hidden', 'hidden');
   }
 

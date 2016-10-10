@@ -7,22 +7,23 @@
       document.body.classList.add('body-registration');
       const registrationForm = new RegistrationForm1();
       registrationContainer = document.querySelector('.registration');
-      registrationContainer.innerHTML = registrationForm.render();
+      registrationContainer.appendChild(registrationForm.render());
       registrationContainer.style.display = 'inline'; 
     }
   }
 
   function nextStepRegistration() {
     if (typeof window === 'object') {
-      document.querySelector('.main__registration').remove();
+      registrationContainer.innerHTML = '';
       const RegistrationForm = window.RegistrationForm2;
       const registrationForm = new RegistrationForm2();
-      registrationContainer.innerHTML = registrationForm.render();
+      registrationContainer.appendChild(registrationForm.render());
     }
   }
 
   function hideRegistration() {
     document.body.classList.remove('body-registration');
+    registrationContainer.innerHTML = '';
     registrationContainer.setAttribute('hidden','hidden');
   }
 

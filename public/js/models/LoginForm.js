@@ -56,15 +56,13 @@
                 }
             });
 
-            self.registrationLink = document.createElement('div');
-            self.registrationLink.classList.add('login__form__link');
-            self.registrationLink.onclick = function() {
-                console.log('click');
-                hideLogin();
-                showRegistration();
-                return 0;
-            };
-            self.registrationLink.innerHTML = 'Регистрация';
+            self.registrationLink = new Link({
+                text: 'Регистрация',
+                attrs: {
+                    class: 'login__form__link',
+                    onclick: 'hideLogin(); showRegistration();'
+                }
+            });
 
             self.el.appendChild(self.h1.render());
             self.el.appendChild(self.emailError.render());
@@ -72,12 +70,12 @@
             self.el.appendChild(self.passwordError.render());
             self.el.appendChild(self.password.render());
             self.el.appendChild(self.submit.render());
-            self.el.appendChild(self.registrationLink);
+            self.el.appendChild(self.registrationLink.render());
         }
 
         render () {
             let self = this;
-            return self.el.outerHTML;
+            return self.el;
         }
 
         validate () {
