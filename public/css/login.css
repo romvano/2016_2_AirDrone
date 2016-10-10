@@ -5,7 +5,7 @@
     background-repeat: no-repeat;
 }
 
-.main__login {
+.login {
     width: 25%;
     min-width: 400px;
     background-color: #f0f0f0;
@@ -18,20 +18,20 @@
     font-family: 'Open Sans', arial;
 }
 
-.main__login__form {
+.login__form {
     margin-left: 10px;
     margin-right: 10px;
     text-align: center;
 }
 
-.main__login__form__input {
+.login__form__input {
     width: 90%;
     height: 45px;
     font-size: 20px;
     margin-bottom: 5px;
 }
 
-.main__login__form__button {
+.login__form__button {
     border-radius: 5px;
     background-color: #4d90fe;
     border: solid 1px #11d;
@@ -42,11 +42,11 @@
     font-weight: bold;
 }
 
-.main__login__header {
+.login__header {
     text-align: center;
 }
 
-.main__login__form__link {
+.login__form__link {
     color: #4d90fe;
     text-decoration: underline;
     text-align: center;

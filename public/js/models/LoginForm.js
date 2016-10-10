@@ -5,57 +5,78 @@
 
         constructor () {
             let self = this;
-            this.el = document.createElement('div');
-            this.el.classList.add('main__login');
-    
-            let h1 = document.createElement('h1');
-            h1.classList.add('main__login__header');
-            h1.innerHTML = 'Вход';
-            this.el.appendChild(h1);
-    
-            let form = document.createElement('form');
-            form.classList.add('main__login__form');
-            form.onsubmit = function() { self.login(); return 0; };
 
-            let emailError = document.createElement('p');
-            emailError.classList.add('main__login__form__error', 'js-email-error');
-            emailError.style.display = 'none';
-            emailError.innerHTML = 'Пожалуйста, введите валидный e-mail!';
+            self.el = document.createElement('div');
+            self.el.classList.add('login');
     
-            let email = document.createElement('input');
-            email.type = 'email';
-            email.classList.add('main__login__form__input', 'js-email');
-            email.required = true;
-            email.placeholder = 'E-mail';
+            self.form = document.createElement('form');
+            self.form.classList.add('login__form');
+            self.form.onsubmit = function() { self.login(); return 0; };
 
-            let passwordError = document.createElement('p');
-            passwordError.classList.add('main__login__form__error', 'js-password-error');
-            passwordError.style.display = 'none';
-            passwordError.innerHTML = 'Пожалуйста, введите пароль!';
+            self.h1 = new Header({
+                text: 'Вход',
+                attrs: {
+                    class: 'login__header'
+                }
+            });
     
-            let password = document.createElement('input');
-            password.type = 'password';
-            password.classList.add('main__login__form__input', 'js-password');
-            password.required = true;
-            password.placeholder = 'Пароль';
+            self.emailError = new Message({
+                text: 'Пожалуйста, введите валидный e-mail!',
+                attrs: {
+                    hidden: 'hidden',
+                    class: 'js-email-error login__form__error'
+                }
+            });
     
-            let submit = document.createElement('button');
-            submit.classList.add('main__login__form__button', 'js-submit');
-            submit.innerHTML = 'Войти!';
+            self.email = new Input({
+                attrs: {
+                    placeholder: 'E-mail',
+                    type: 'email',
+                    class: 'js-email login__form__input'
+                }
+            });
 
-            let registrationLink = document.createElement('div');
-            registrationLink.classList.add('main__login__form__link');
-            registrationLink.onclick = function() { console.log('click'); hideLogin(); showRegistration(); return 0;};
-            registrationLink.innerHTML = 'Регистрация';
+            self.passwordError = new Message({
+                text: 'Пожалуйста, введите пароль!',
+                attrs: {
+                    hidden: 'hidden',
+                    class: ' js-password-error login__form__error'
+                }
+            });
+    
+            self.password = new Input({
+                attrs: {
+                    placeholder: 'Password',
+                    type: 'password',
+                    class: 'js-password login__form__input'
+                }
+            });
+    
+            self.submit = new Button({
+                text: 'Войти!',
+                attrs: {
+                    class: 'js_submit login__form__button'
+                }
+            });
 
-            form.appendChild(emailError);
-            form.appendChild(email);
-            form.appendChild(passwordError);
-            form.appendChild(password);
-            form.appendChild(submit);
-            form.appendChild(registrationLink);
-            this.el.appendChild(form);
-            document.querySelector('.main').appendChild(this.el);
+            self.registrationLink = document.createElement('div');
+            self.registrationLink.classList.add('login__form__link');
+            self.registrationLink.onclick = function() { console.log('click'); hideLogin(); showRegistration(); return 0;};
+            self.registrationLink.innerHTML = 'Регистрация';
+
+            self.form.appendChild(self.h1.render());
+            self.form.appendChild(self.emailError.render());
+            self.form.appendChild(self.email.render());
+            self.form.appendChild(self.passwordError.render());
+            self.form.appendChild(self.password.render());
+            self.form.appendChild(self.submit.render());
+            self.form.appendChild(self.registrationLink);
+            this.el.appendChild(self.form);
+        }
+
+        render () {
+            let self = this;
+            return self.el.outerHTML;
         }
 
         validate () {
@@ -82,7 +103,7 @@
                 email: document.querySelector('.js-email').value,
                 password: document.querySelector('.js-password').value,
             };
-            let response = request('/session', 'POST', data);
+            let response = request('https://air-drone.herokuapp.com/session', 'POST', data);
             alert(response);
         }
 
