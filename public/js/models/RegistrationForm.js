@@ -54,6 +54,14 @@
                     type: 'password',
                     class: 'js-password registration__form__input',
                     name: 'password'
+                },
+                eventListeners: {
+                    blur: function () { self.validatePassword(self); },
+                    keyup: function (e) {
+                        if (e.keyCode != 9 && e.keyCode != 8) {
+                            self.validatePassword(self);
+                        }
+                    }
                 }
             });
     
@@ -142,6 +150,14 @@
                     type: 'text',
                     class: 'js-login registration__form__input',
                     name: 'login'
+                },
+                eventListeners: {
+                    blur: function () { self.validateLogin(self); },
+                    keyup: function (e) {
+                        if (e.keyCode != 9 && e.keyCode != 8) {
+                            self.validateLogin(self);
+                        }
+                    }
                 }
             });
     
@@ -149,7 +165,7 @@
                 text: 'Зарегистрироваться!',
                 attrs: {
                     class: 'js_submit registration__form__button',
-                    name: 'login'
+                    name: 'button'
                 }
             });
 
@@ -166,6 +182,7 @@
 
         validateLogin (form) {
             if (form.el.elements.login.value.length < 1) {
+                console.log('here');
                 form.el.children.loginError.style.display = 'block';
                 return false;
             }

@@ -2,7 +2,7 @@
   class Message extends Component {
     constructor (options) {
       super(options);
-      this.el = document.createElement('p');
+      this.el = document.createElement('span');
     }
     
     setAttrs (attrs) {

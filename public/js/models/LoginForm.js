@@ -8,7 +8,7 @@
 
             self.el = document.createElement('form');
             self.el.classList.add('login__form');
-            self.el.onsubmit = function() { self.login(); return 0; };
+            self.el.onsubmit = function() { self.login(); return false; };
 
             self.h1 = new Header({
                 text: 'Вход',
@@ -21,15 +21,20 @@
                 text: 'Пожалуйста, введите валидный e-mail!',
                 attrs: {
                     hidden: 'hidden',
-                    class: 'js-email-error login__form__error'
+                    class: 'js-email-error login__form__error',
+                    name: 'emailError'
                 }
             });
     
             self.email = new Input({
                 attrs: {
                     placeholder: 'E-mail',
-                    type: 'email',
-                    class: 'js-email login__form__input'
+                    type: 'text',
+                    class: 'js-email login__form__input',
+                    name: 'email'
+                },
+                eventListeners: {
+                    blur: function () { self.validateEmail(self); }
                 }
             });
 
@@ -37,7 +42,8 @@
                 text: 'Пожалуйста, введите пароль!',
                 attrs: {
                     hidden: 'hidden',
-                    class: ' js-password-error login__form__error'
+                    class: 'js-password-error login__form__error',
+                    name: 'passwordError'
                 }
             });
     
@@ -45,14 +51,24 @@
                 attrs: {
                     placeholder: 'Password',
                     type: 'password',
-                    class: 'js-password login__form__input'
+                    class: 'js-password login__form__input',
+                    name: 'password'
+                },
+                eventListeners: {
+                    blur: function () { self.validatePassword(self); },
+                    keyup: function (e) {
+                        if (e.keyCode != 9 && e.keyCode != 8) {
+                            self.validatePassword(self);
+                        }
+                    }
                 }
             });
     
             self.submit = new Button({
                 text: 'Войти!',
                 attrs: {
-                    class: 'js_submit login__form__button'
+                    class: 'js_submit login__form__button',
+                    name: 'button'
                 }
             });
 
@@ -60,7 +76,8 @@
                 text: 'Регистрация',
                 attrs: {
                     class: 'login__form__link',
-                    onclick: 'hideLogin(); showRegistration();'
+                    onclick: 'hideLogin(); showRegistration();',
+                    name: 'registration'
                 }
             });
 
@@ -78,25 +95,32 @@
             return self.el;
         }
 
-        validate () {
-            if (document.querySelector('.js-email').value.search(/@/) == -1) {
-                document.querySelector('.js-email-error').style.display = 'block';
+        validateEmail (form) {
+            if (form.el.elements.email.value.search(/.@./) == -1) {
+                form.el.children.emailError.style.display = 'block';
                 return false;
-            } else {
-                document.querySelector('.js-email-error').style.display = 'none';
             }
-            if (document.querySelector('.js-password').value.length < 1) {
-                document.querySelector('.js-password-error').style.display = 'block';
-                return false;
-            } else {
-                document.querySelector('.js-password-error').style.display = 'none';
-            }
+            form.el.children.emailError.style.display = 'none';
             return true;
+        }
+
+        validatePassword (form) {
+            if (form.el.elements.password.value.length < 1) {
+                form.el.children.passwordError.style.display = 'block';
+                return false;
+            }
+            form.el.children.passwordError.style.display = 'none';
+            return true;
+        }
+
+        validate () {
+            let self = this;
+            return self.validateEmail(self) && self.validatePassword(self);
         }
 
         login () {
             let self = this;
-            if (!self.validate) {
+            if (!self.validate()) {
                 return;
             }
             let data = {

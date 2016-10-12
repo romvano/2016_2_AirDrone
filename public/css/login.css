@@ -8,8 +8,8 @@
 .login, .registration {
     display: none;
     position: absolute;
-    width: 25%;
-    min-width: 400px;
+    width: 20%;
+    min-width: 350px;
     background-color: #f0f0f0;
     border-radius: 17px;
     top: 25vh;
@@ -58,4 +58,6 @@
 .login__form__error, .registration__form__error {
     font-style: italic;
     color: red;
+    text-align: left;
+    margin-left: 12px;
 }
