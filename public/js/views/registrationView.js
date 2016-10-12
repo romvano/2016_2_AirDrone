@@ -24,7 +24,7 @@
   function hideRegistration() {
     document.body.classList.remove('body-registration');
     registrationContainer.innerHTML = '';
-    registrationContainer.setAttribute('hidden','hidden');
+    registrationContainer.style.display = 'none';
   }
 
   window.showRegistration = showRegistration;

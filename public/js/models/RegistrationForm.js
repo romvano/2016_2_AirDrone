@@ -22,15 +22,20 @@
                 text: 'Пожалуйста, введите валидный e-mail!',
                 attrs: {
                     hidden: 'hidden',
-                    class: 'js-email-error registration__form__error'
+                    class: 'js-email-error registration__form__error',
+                    name: 'emailError'
                 }
             });
 
             self.email = new Input({
                 attrs: {
                     placeholder: 'E-mail',
-                    type: 'email',
-                    class: 'js-email registration__form__input'
+                    type: 'text',
+                    class: 'js-email registration__form__input',
+                    name: 'email'
+                },
+                eventListeners: {
+                    blur: function () { self.validateEmail(self); }
                 }
             });
 
@@ -38,7 +43,8 @@
                 text: 'Пожалуйста, введите пароль!',
                 attrs: {
                     hidden: 'hidden',
-                    class: ' js-password-error registration__form__error'
+                    class: 'js-password-error registration__form__error',
+                    name: 'passwordError'
                 }
             });
     
@@ -46,14 +52,16 @@
                 attrs: {
                     placeholder: 'Password',
                     type: 'password',
-                    class: 'js-password registration__form__input'
+                    class: 'js-password registration__form__input',
+                    name: 'password'
                 }
             });
     
             self.submit = new Button({
                 text: 'Продолжить',
                 attrs: {
-                    class: 'js_submit registration__form__button'
+                    class: 'js_submit registration__form__button',
+                    name: 'button'
                 }
             });
     
@@ -70,20 +78,27 @@
             return self.el;
         }
         
-        validate () {
-            if (document.querySelector('.js-email').value.search(/@/) == -1) {
-                document.querySelector('.js-email-error').style.display = 'block';
+        validateEmail (form) {
+            if (form.el.elements.email.value.search(/.@./) == -1) {
+                form.el.children.emailError.style.display = 'block';
                 return false;
-            } else {
-                document.querySelector('.js-email-error').style.display = 'none';
             }
-            if (document.querySelector('.js-password').value.length < 1) {
-                document.querySelector('.js-password-error').style.display = 'block';
-                return false;
-            } else {
-                document.querySelector('.js-password-error').style.display = 'none';
-            }
+            form.el.children.emailError.style.display = 'none';
             return true;
+        }
+
+        validatePassword (form) {
+            if (form.el.elements.password.value.length < 1) {
+                form.el.children.passwordError.style.display = 'block';
+                return false;
+            }
+            form.el.children.passwordError.style.display = 'none';
+            return true;
+        }
+
+        validate () {
+            let self = this;
+            return self.validateEmail(self) && self.validatePassword(self);
         }
 
         nextStep () {
@@ -116,7 +131,8 @@
                 text: 'Пожалуйста, введите логин!',
                 attrs: {
                     hidden: 'hidden',
-                    class: 'js-login-error registration__form__error'
+                    class: 'js-login-error registration__form__error',
+                    name: 'loginError'
                 }
             });
 
@@ -124,14 +140,16 @@
                 attrs: {
                     placeholder: 'Кликуха',
                     type: 'text',
-                    class: 'js-login registration__form__input'
+                    class: 'js-login registration__form__input',
+                    name: 'login'
                 }
             });
     
             self.submit = new Button({
                 text: 'Зарегистрироваться!',
                 attrs: {
-                    class: 'js_submit registration__form__button'
+                    class: 'js_submit registration__form__button',
+                    name: 'login'
                 }
             });
 
@@ -146,19 +164,24 @@
             return self.el;
         }
 
-        validate () {
-            if (document.querySelector('.js-login').value.length < 1) {
-                document.querySelector('.js-login-error').style.display = 'block';
+        validateLogin (form) {
+            if (form.el.elements.login.value.length < 1) {
+                form.el.children.loginError.style.display = 'block';
                 return false;
-            } else {
-                document.querySelector('.js-login-error').style.display = 'none';
             }
+            form.el.children.loginError.style.display = 'none';
             return true;
+        }
+
+        validate () {
+            let self = this;
+            return self.validateLogin(self);
         }
 
         register () {
             let self = this;
-            if (!self.validate) {
+            if (!self.validate()) {
+                console.log('here');
                 return;
             }
             registrationData.username = self.login.value;

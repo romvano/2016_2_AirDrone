@@ -54,3 +54,8 @@
     text-decoration: underline;
     text-align: center;
 }
+
+.login__form__error, .registration__form__error {
+    font-style: italic;
+    color: red;
+}

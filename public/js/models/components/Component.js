@@ -3,6 +3,7 @@
     constructor (options) {
       this.text = options.text;
       this.attrs = options.attrs || [];
+      this.eventListeners = options.eventListeners || [];
     }
     
     setAttrs (attrs) {
@@ -11,9 +12,16 @@
       });
     }
 
+    setEventListeners (eventListeners) {
+      Object.keys(eventListeners).forEach(event => {
+        this.el.addEventListener(event, eventListeners[event]);
+      });
+    }
+
     render () {
       this.el.innerHTML = this.text;
       this.setAttrs(this.attrs);
+      this.setEventListeners(this.eventListeners);
       return this.el;
     }
 

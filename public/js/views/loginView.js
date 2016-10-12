@@ -15,7 +15,7 @@
   function hideLogin() {
     document.body.classList.remove('body-login'); // bg image
     loginContainer.innerHTML = '';
-    loginContainer.setAttribute('hidden', 'hidden');
+    loginContainer.style.display = 'none';
   }
 
   window.showLogin = showLogin;
