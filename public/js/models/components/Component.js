@@ -1,35 +1,35 @@
 (function () {
   class Component {
-    constructor (options) {
+    constructor(options) {
       this.text = options.text;
       this.attrs = options.attrs || [];
       this.eventListeners = options.eventListeners || [];
     }
-    
-    setAttrs (attrs) {
-      Object.keys(attrs).forEach(name => {
+
+    setAttrs(attrs) {
+      Object.keys(attrs).forEach((name) => {
         this.el.setAttribute(name, attrs[name]);
       });
     }
 
-    setEventListeners (eventListeners) {
-      Object.keys(eventListeners).forEach(event => {
+    setEventListeners(eventListeners) {
+      Object.keys(eventListeners).forEach((event) => {
         this.el.addEventListener(event, eventListeners[event]);
       });
     }
 
-    render () {
+    render() {
       this.el.innerHTML = this.text;
       this.setAttrs(this.attrs);
       this.setEventListeners(this.eventListeners);
       return this.el;
     }
 
-    toString () {
+    toString() {
       return this.el.outerHTML;
     }
   }
 
-  //export
+  // export
   window.Component = Component;
-} ());
+}());

@@ -1,23 +1,23 @@
 (function () {
   class Input extends Component {
-    constructor (options) {
+    constructor(options) {
       super(options);
       this.el = document.createElement('input');
     }
-    
-    setAttrs (attrs) {
+
+    setAttrs(attrs) {
       super.setAttrs(attrs);
     }
 
-    render () {
-      return super.render();
+    toString() {
+      return super.toString();
     }
 
-    toString () {
-      return super.toString();
+    render() {
+      return super.render();
     }
   }
 
-  //export
+  // export
   window.Input = Input;
-} ());
+}());

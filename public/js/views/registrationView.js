@@ -1,21 +1,21 @@
+/* global RegistrationForm1 RegistrationForm2 */
+
 (function () {
   let registrationContainer;
 
   function showRegistration() {
     if (typeof window === 'object') {
-      const RegistrationForm = window.RegistrationForm1;
       document.body.classList.add('body-registration');
       const registrationForm = new RegistrationForm1();
       registrationContainer = document.querySelector('.registration');
       registrationContainer.appendChild(registrationForm.render());
-      registrationContainer.style.display = 'inline'; 
+      registrationContainer.style.display = 'inline';
     }
   }
 
   function nextStepRegistration() {
     if (typeof window === 'object') {
       registrationContainer.innerHTML = '';
-      const RegistrationForm = window.RegistrationForm2;
       const registrationForm = new RegistrationForm2();
       registrationContainer.appendChild(registrationForm.render());
     }
