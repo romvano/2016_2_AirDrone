@@ -1,6 +1,6 @@
-/* global Component */
-
 (function () {
+  const Component = window.Component;
+
   class Button extends Component {
     constructor(options) {
       super(options);

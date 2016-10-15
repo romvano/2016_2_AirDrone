@@ -1,6 +1,11 @@
-/* global nextStepRegistration */
-
 (function () {
+  const Button = window.Button;
+  const Header = window.Header;
+  const Input = window.Input;
+  const Message = window.Message;
+  function nextStepRegistration() { window.nextStepRegistration(); }
+  const request = window.request;
+
   const registrationData = {};
 
   class RegistrationForm1 {

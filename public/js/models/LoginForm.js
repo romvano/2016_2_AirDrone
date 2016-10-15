@@ -1,4 +1,11 @@
 (function () {
+  const Button = window.Button;
+  const Header = window.Header;
+  const Input = window.Input;
+  const Link = window.Link;
+  const Message = window.Message;
+  const request = window.request;
+
   class LoginForm {
     constructor() {
       const self = this;

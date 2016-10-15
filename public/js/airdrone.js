@@ -1,6 +1,4 @@
-(function(){
-    'use strict';
-    
-    showLogin();
-    
-})();
+(function () {
+  const showLogin = window.showLogin;
+  showLogin();
+}());

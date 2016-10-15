@@ -1,6 +1,7 @@
-/* global RegistrationForm1 RegistrationForm2 */
-
 (function () {
+  const RegistrationForm1 = window.RegistrationForm1;
+  const RegistrationForm2 = window.RegistrationForm2;
+
   let registrationContainer;
 
   function showRegistration() {

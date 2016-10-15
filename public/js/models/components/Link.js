@@ -1,10 +1,10 @@
 (function () {
   const Component = window.Component;
 
-  class Message extends Component {
+  class Link extends Component {
     constructor(options) {
       super(options);
-      this.el = document.createElement('span');
+      this.el = document.createElement('a');
     }
 
     setAttrs(attrs) {
@@ -21,5 +21,5 @@
   }
 
   // export
-  window.Message = Message;
+  window.Link = Link;
 }());

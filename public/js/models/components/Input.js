@@ -1,4 +1,6 @@
 (function () {
+  const Component = window.Component;
+
   class Input extends Component {
     constructor(options) {
       super(options);
