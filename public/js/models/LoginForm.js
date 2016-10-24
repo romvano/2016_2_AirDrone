@@ -132,8 +132,8 @@
         return;
       }
       const data = {
-        email: self.email.value,
-        password: self.password.value,
+        email: document.querySelector('.js-email').value,
+        password: document.querySelector('.js-password').value,
       };
       const response = request('https://air-drone.herokuapp.com/session', 'POST', data);
       alert(response);

@@ -121,8 +121,8 @@
       if (!self.validate()) {
         return;
       }
-      registrationData.email = self.email.value;
-      registrationData.password = self.password.value;
+      registrationData.email = document.querySelector('.js-email').value;
+      registrationData.password = document.querySelector('.js-password').value;
       nextStepRegistration();
     }
   }
@@ -208,7 +208,7 @@
         console.log('here');
         return;
       }
-      registrationData.username = self.login.value;
+      registrationData.username = document.querySelector('.js-login').value;
       const response = request('https://air-drone.herokuapp.com/user', 'POST', registrationData);
       alert(response);
     }
