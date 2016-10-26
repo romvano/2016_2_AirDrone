@@ -1,0 +1,10 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="json">
+    <div class="registration" style="display: inline;">
+        <form class="registration__form">
+            <h1 class="registration__header">Познакомимся?</h1>
+            <span class="js-login-error registration__form__error" name="loginError" hidden="hidden">Пожалуйста, введите логин!</span>
+            <input placeholder="Кликуха" class="js-login registration__form__input" name="login" type="text">
+            <button class="js_submit registration__form__button" name="button">Зарегистрироваться!</button>
+        </form>
+    </div>
+</fest:template>

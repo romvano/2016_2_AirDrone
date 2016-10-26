@@ -1,11 +1,11 @@
-.body-login, .body-registration {
+.body-login {
     background-image: url("/image/login_background.jpg");
     background-position: center -25vh;
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
 
-.login, .registration {
+.login {
     display: none;
     position: absolute;
     width: 20%;
@@ -20,20 +20,20 @@
     font-family: 'Open Sans', arial;
 }
 
-.login__form, .registration__form {
+.login__form {
     margin-left: 10px;
     margin-right: 10px;
     text-align: center;
 }
 
-.login__form__input, .registration__form__input {
+.login__form__input {
     width: 90%;
     height: 45px;
     font-size: 20px;
     margin-bottom: 5px;
 }
 
-.login__form__button, .registration__form__button {
+.login__form__button {
     border-radius: 5px;
     background-color: #4d90fe;
     border: solid 1px #11d;
@@ -45,17 +45,17 @@
     margin-bottom: 7px;
 }
 
-.login__header, .registration__header {
+.login__header {
     text-align: center;
 }
 
-.login__form__link, .registration__form__link {
+.login__form__link {
     color: #4d90fe;
     text-decoration: underline;
     text-align: center;
 }
 
-.login__form__error, .registration__form__error {
+.login__form__error {
     font-style: italic;
     color: red;
     text-align: left;

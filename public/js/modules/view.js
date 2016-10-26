@@ -122,5 +122,4 @@
 
 	// export
 	window.View = View;
-
 })();
