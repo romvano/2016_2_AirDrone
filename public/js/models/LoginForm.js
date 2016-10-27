@@ -38,7 +38,7 @@
           name: 'email',
         },
         eventListeners: {
-          blur: function onbluronblur() { self.validateEmail(); },
+          blur: function onblur() { self.validateEmail(); },
         },
       });
 
@@ -132,8 +132,8 @@
         return;
       }
       const data = {
-        email: self.email.value,
-        password: self.password.value,
+        email: self.el.elements.email.value,
+        password: self.el.elements.password.value,
       };
       const response = request('https://air-drone.herokuapp.com/session', 'POST', data);
       alert(response);
