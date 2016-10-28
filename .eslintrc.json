@@ -1,0 +1,19 @@
+{
+    "extends": "airbnb",
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "import"
+    ],
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "indent": ["error", 4],
+    "no-unused-vars": [
+        "error",
+        {
+            "argsIgnorePattern": "^_"
+        }
+    ]
+}
