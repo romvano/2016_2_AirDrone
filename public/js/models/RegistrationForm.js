@@ -210,7 +210,11 @@
       }
       registrationData.username = self.el.elements.login.value;
       const response = request('https://air-drone.herokuapp.com/user', 'POST', registrationData);
-      alert(response);
+//      alert(response);
+      if (JSON.parse(response)['code'] === 200) {
+          window.showGameplay();
+      }
+
     }
   }
 

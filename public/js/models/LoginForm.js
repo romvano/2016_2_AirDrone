@@ -136,8 +136,6 @@
         password: self.el.elements.password.value,
       };
       const response = request('https://air-drone.herokuapp.com/session', 'POST', data);
-        window.response = response;
-        alert(response);
       if (JSON.parse(response)['code'] === 200) {
           window.showGameplay();
       }
