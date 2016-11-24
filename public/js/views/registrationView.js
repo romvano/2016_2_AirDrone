@@ -1,34 +1,41 @@
 (function () {
-  const RegistrationForm1 = window.RegistrationForm1;
-  const RegistrationForm2 = window.RegistrationForm2;
+    const View = window.View;
+    const RegistrationForm = window.RegistrationForm;
+    const fest = window.fest;
 
-  let registrationContainer;
+    class RegistrationView extends View {
+        constructor (options = {}) {
+            console.log('reg?')
+            super(options);
+            this.setRouter(window.router);
+            this._el = document.querySelector('.js-registration');
+            this.hide();
+        }
 
-  function showRegistration() {
-    if (typeof window === 'object') {
-      document.body.classList.add('body-registration');
-      const registrationForm = new RegistrationForm1();
-      registrationContainer = document.querySelector('.registration');
-      registrationContainer.appendChild(registrationForm.render());
-      registrationContainer.style.display = 'inline';
+        resume(options = {}) {
+            const self = this;
+            console.log('inresume: ', self._el)
+            self._component = new RegistrationForm({
+                el: self._el,
+                router: self.router,
+            });
+            console.log('com: ', self._component)
+            self._component.render();
+            self.show();
+        }
+
+        show(options = {}) {
+            super.show();
+            this._el.hidden = false;
+            document.body.classList.add('body-registration');
+        }
+
+        hide(options = {}) {
+            super.hide();
+            document.body.classList.remove('body-registration');
+        }
     }
-  }
 
-  function nextStepRegistration() {
-    if (typeof window === 'object') {
-      registrationContainer.innerHTML = '';
-      const registrationForm = new RegistrationForm2();
-      registrationContainer.appendChild(registrationForm.render());
-    }
-  }
-
-  function hideRegistration() {
-    document.body.classList.remove('body-registration');
-    registrationContainer.innerHTML = '';
-    registrationContainer.style.display = 'none';
-  }
-
-  window.showRegistration = showRegistration;
-  window.nextStepRegistration = nextStepRegistration;
-  window.hideRegistration = hideRegistration;
+    // export
+    window.RegistrationView = RegistrationView;
 }());

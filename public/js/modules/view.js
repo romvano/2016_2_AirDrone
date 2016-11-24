@@ -1,5 +1,6 @@
+//require(['node_modules/fest/lib/fest'], function (fest) {
 (function () {
-	'use strict';
+//	'use strict';
 
 	/**
 	 * Класс представляет собой view
@@ -122,5 +123,5 @@
 
 	// export
 	window.View = View;
-
 })();
+//});
