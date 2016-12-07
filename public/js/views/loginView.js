@@ -1,5 +1,4 @@
 import View from '../modules/view';
-//import LoginForm from '../components/LoginForm';
 import template from '../../templates/login.tmpl.xml';
 
 export default class LoginView extends View {
