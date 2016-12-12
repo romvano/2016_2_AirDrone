@@ -5,16 +5,13 @@ $tr_text_clr2: black;
 $vertical_padding: 8px;
 $horizontal_padding: 8px;
 
+.body-scoreboard {
+    @extend .background_image;
+    background-image: url("/image/sky.jpg");
+}
+
 .scoreboard {
-    @extend .content;
-    width: 60%;
-    margin: auto;
-    top: 10vh;
-    left: 0;
-    right: 0;
-    min-width: 600px;
-    min-height: 70vh;
-    text-align: center;
+    @extend .big_block;
 }
 
 .scoreboard__table {

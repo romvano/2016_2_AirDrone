@@ -10,7 +10,7 @@ export default class View {
         this.setRouter(window.router);
 		this.tagName = options.tagName || 'div';
         this._el = document.querySelector(options.element) || document.createElement(this.tagName);
-        console.log('here: ', this._el);
+        this.bodyClass = options.bodyClass;
         this.hide();
 	}
 
@@ -38,6 +38,7 @@ export default class View {
 	 * @param {Object} [options={}] - Объект с параметрами
 	 */
 	resume(options = {}) {
+        this.render();
 		this.show();
 	}
 
@@ -46,7 +47,11 @@ export default class View {
 	 * @param {Object} [options={}] - Объект с параметрами
 	 */
 	show(options = {}) {
-		this._el.hidden = false;
+        const self = this;
+		self._el.hidden = false;
+        if (self.bodyClass) {
+            document.body.classList.add(self.bodyClass);
+        }
 	}
 
 	/**
@@ -54,7 +59,11 @@ export default class View {
 	 * @param {Object} [options={}] - Объект с параметрами
 	 */
 	hide(options = {}) {
-		this._el.hidden = true;
+        const self = this;
+		self._el.hidden = true;
+        if (self.bodyClass) {
+            document.body.classList.remove(self.bodyClass);
+        }
 	}
 
 	/**

@@ -3,13 +3,7 @@ import template from '../../templates/registration.tmpl.xml';
 
 export default class RegistrationView extends View {
     constructor (options = {}) {
-        super({ element: '.js-registration' });
-    }
-
-    resume(options = {}) {
-        const self = this;
-        self.render();
-        self.show();
+        super({ element: '.js-registration', bodyClass: 'body-registration' });
     }
 
     render() {
@@ -34,17 +28,6 @@ export default class RegistrationView extends View {
         self.emailError = self._form.children.emailError;
         self.passwordError = self._form.children.passwordError;
         self.loginError = self._form.children.loginError;
-    }
-
-    show(options = {}) {
-        super.show();
-        this._el.hidden = false;
-        document.body.classList.add('body-registration');
-    }
-
-    hide(options = {}) {
-        super.hide();
-        document.body.classList.remove('body-registration');
     }
 
     validateEmail() {

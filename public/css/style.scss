@@ -1,4 +1,5 @@
 $content_bgcolor: #f0f0f0;
+$content_bgcolor_transparent: rgba(240, 240, 240, 0.6);
 $content_border_radius: 17px;
 $content_font_family: 'Open Sans', arial;
 $content_border: solid 1px #ddd;
@@ -17,15 +18,34 @@ $button_text_color: $accented_text_color;
     border: $content_border;
     box-shadow: $content_box_shadow;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .background_image {
+    height: 100vh;
     background-position: center -25vh;
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
 
+.big_block {
+    @extend .content;
+    width: 60%;
+    margin: auto;
+    top: 10vh;
+    left: 0;
+    right: 0;
+    min-width: 600px;
+    min-height: 70vh;
+    text-align: center;
+}
+
+.error {
+    font-style: italic;
+    color: red;
+}
+
 @import 'login.scss';
 @import 'registration.scss';
 @import 'scoreboard.scss';
-
+@import 'rooms.scss';

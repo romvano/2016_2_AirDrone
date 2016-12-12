@@ -48,8 +48,7 @@
 }
 
 .login__form__error {
-    font-style: italic;
-    color: red;
+    @extend .error;
     text-align: left;
     margin-left: 12px;
 }

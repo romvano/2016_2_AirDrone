@@ -3,13 +3,7 @@ import template from '../../templates/login.tmpl.xml';
 
 export default class LoginView extends View {
     constructor () {
-        super({ element: '.js-login' });
-    }
-
-    resume(options = {}) {
-        const self = this;
-        self.render();
-        self.show();
+        super({ element: '.js-login', bodyClass: 'body-login' });
     }
 
     render() {
@@ -27,16 +21,6 @@ export default class LoginView extends View {
         self._form.children.registration.onclick = function () { self.router.go('/registration'); }
         self.emailError = self._form.children.emailError;
         self.passwordError = self._form.children.passwordError;
-    }
-
-    show(options = {}) {
-        super.show();
-        document.body.classList.add('body-login');
-    }
-
-    hide(options = {}) {
-        super.hide();
-        document.body.classList.remove('body-login');
     }
 
     validateEmail() {
