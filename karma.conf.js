@@ -7,7 +7,7 @@ module.exports = function (config) {
 		frameworks: ['jasmine'],
 
 		files: [
-			'./public/components/**/*.js',
+			'./public/models/**/*.js',
 			'./public/modules/**/*.js',
 			'./public/views/**/*.js',
 			'./test/**/*.spec.js'
@@ -15,7 +15,7 @@ module.exports = function (config) {
 
 		reporters: ['progress', 'coverage'],
 		preprocessors: {
-			'./public/components/**/*.js': ['coverage'],
+			'./public/models/**/*.js': ['coverage'],
 			'./public/modules/**/*.js': ['coverage'],
 			'./public/views/**/*.js': ['coverage']
 		},

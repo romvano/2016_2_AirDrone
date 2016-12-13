@@ -1,4 +1,5 @@
 import View from '../modules/view';
+import UserModel from '../models/UserModel';
 import template from '../../templates/login.tmpl.xml';
 
 export default class LoginView extends View {

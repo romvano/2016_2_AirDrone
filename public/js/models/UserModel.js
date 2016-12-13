@@ -96,7 +96,7 @@ export default class UserModel {
     login () {
         const self = this;
         const data = {
-            username: self.username,
+            email: self.email,
             password: self.password,
         };
         const response = request('https://air-drone.herokuapp.com/session', 'POST', data);
