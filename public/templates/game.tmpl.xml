@@ -1,0 +1,8 @@
+<fest:template xmlns:fest="http://fest.mail.ru" context_name="json">
+    <img class="game__video">
+        <fest:attributes>
+            <fest:attribute name="src"><fest:value>json.source</fest:value></fest:attribute>
+        </fest:attributes>
+    </img>
+    <canvas class="game__canvas">Ваш браузер морально устарел. Обновите. Быстро.</canvas>
+</fest:template>

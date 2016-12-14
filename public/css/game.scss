@@ -1,0 +1,27 @@
+.game {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.game__block {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.game__video {
+    @extend .game__block;
+    z-index: -1000;
+}
+
+.game__canvas {
+    @extend .game__block;
+    z-index: 1000;
+}
