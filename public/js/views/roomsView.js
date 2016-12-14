@@ -13,50 +13,46 @@ export default class RoomsView extends View {
     }
 
     render () {
-        const self = this;
-        self.roomCollection.fetch().then(() => {
-            self._el.innerHTML = template(self.roomCollection.getCollection());
+        this.roomCollection.fetch().then(() => {
+            this._el.innerHTML = template(this.roomCollection.getCollection());
 
-            self.error = self._el.querySelector('.js-error');
+            this.error = this._el.querySelector('.js-error');
     
-            self.rooms = self._el.querySelectorAll('.rooms__room');
-            for (const room of self.rooms) {
-                room.onclick = function () { self.selectRoom(room, room.nextSibling) };
+            this.rooms = this._el.querySelectorAll('.rooms__room');
+            for (const room of this.rooms) {
+                room.onclick = (function () { this.selectRoom(room, room.nextSibling) }).bind(this);
             }
     
-            self.colors = self._el.querySelectorAll('.js-color');
-            console.log(self.colors);
-            for (const color of self.colors) {
+            this.colors = this._el.querySelectorAll('.js-color');
+            console.log(this.colors);
+            for (const color of this.colors) {
                 console.log(color);
-                color.onclick = function () { console.log('entered color click'); self.selectColor(color) };
+                color.onclick = (function () { console.log('entered color click'); this.selectColor(color) }).bind(this);
             }
             console.log('before join');
     
-            self._join = self._el.querySelector('.js-join');
-            console.log(self.join);
-            self._join.onclick = function () { self.join(); };
+            this._join = this._el.querySelector('.js-join');
+            console.log(this.join);
+            this._join.onclick = (function () { this.join(); }).bind(this);
             console.log('final');
 
-            self._el.querySelector('.js-create').onclick = function () { self.router.go('/scoreboard'); };
+            this._el.querySelector('.js-create').onclick = (function () { this.router.go('/scoreboard'); }).bind(this);
         });
     }
 
     selectRoom (room, details) {
-        const self = this;
-        for (let i = 0; i < self.rooms.length; ++i) {
-            if (self.rooms[i] !== room) {
-                self.rooms[i].hidden = true;
+        for (let i = 0; i < this.rooms.length; ++i) {
+            if (this.rooms[i] !== room) {
+                this.rooms[i].hidden = true;
             } else {
-                self.selectedRoom = self.roomCollection.getCollection()[i].id;
+                this.selectedRoom = this.roomCollection.getCollection()[i].id;
             }
         }
         details.hidden = false;
     }
 
     selectColor(color) {
-        console.log(color);
-        const self = this;
-        for (const c of self.colors) {
+        for (const c of this.colors) {
             if (c === color) {
                 c.classList.add('rooms__details__colors__color-clicked');
                 c.classList.remove('rooms__details__colors__color');
@@ -65,39 +61,34 @@ export default class RoomsView extends View {
                 c.classList.remove('rooms__details__colors__color-clicked');
             }
         }
-        self.drone.color = color.style['background-color'];
-        self.error.textContent = '';
-        self.error.hidden = true;
+        this.drone.color = color.style['background-color'];
+        this.error.textContent = '';
+        this.error.hidden = true;
     }
 
     join() {
-        const self = this;
-        console.log(self.drone);
-        if (self.drone.color !== undefined) {
-            console.log('if');
-            self.error.textContent = '';
-            self.error.hidden = true;
-            self.drone.save(self.selectedRoom).then(() => {
-                if (self.drone.error !== '') {
-                    self.error.textContent = 'Что-то пошло не так. Попробуйте еще раз!';
-                    self.error.hidden = false;
+        if (this.drone.color !== undefined) {
+            this.error.textContent = '';
+            this.error.hidden = true;
+            this.drone.save(this.selectedRoom).then(() => {
+                if (this.drone.error !== '') {
+                    this.error.textContent = 'Что-то пошло не так. Попробуйте еще раз!';
+                    this.error.hidden = false;
                 }
-                self.router.go('/game');
+                this.router.go('/game');
             });
         } else {
-            console.log('else');
-            self.error.textContent = 'Выберите цвет дрона!';
-            self.error.hidden = false;
+            this.error.textContent = 'Выберите цвет дрона!';
+            this.error.hidden = false;
         }
     }
 
     back (details) {
-        const self = this;
         details.hidden = true;
-        for (const r of self.rooms) {
+        for (const r of this.rooms) {
             r.hidden = false;
         }
-        self.selectedRoom = undefined;
+        this.selectedRoom = undefined;
     }
 
 }

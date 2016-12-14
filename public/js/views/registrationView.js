@@ -8,106 +8,100 @@ export default class RegistrationView extends View {
     }
 
     render() {
-        const self = this;
-        self._el.innerHTML = template(self.data);
-        self._form = self._el.querySelector('.js-registration-form');
-        self._form.onsubmit = function () { self.register(); return false; }
-        self._form.children.email.onblur = function () { self.validateEmail(); }
-        self._form.children.password.onblur = function () { self.validatePassword(); }
-        self._form.children.password.onkeyup = function (e) { 
+        this._el.innerHTML = template(this.data);
+        this._form = this._el.querySelector('.js-registration-form');
+        this._form.onsubmit = (function () { this.register(); return false; }).bind(this);
+        this._form.children.email.onblur = (function () { this.validateEmail(); }).bind(this);
+        this._form.children.password.onblur = (function () { this.validatePassword(); }).bind(this);
+        this._form.children.password.onkeyup = (function (e) { 
             if (e.keyCode !== 8 && e.keyCode !== 9) {
-                self.validatePassword();
+                this.validatePassword();
             }
-        }
-        self._form.children.password2.onblur = function () { self.validatePassword(); }
-        self._form.children.password2.onkeyup = function (e) {
+        }).bind(this);
+        this._form.children.password2.onblur = (function () { this.validatePassword(); }).bind(this);
+        this._form.children.password2.onkeyup = (function (e) {
             if (e.keyCode !== 8 && e.keyCode !== 9) {
-                self.validatePassword();
+                this.validatePassword();
             }
-        }
-        self._form.children.login.onblur = function () { self.validateLogin(); }
-        self.emailError = self._form.children.emailError;
-        self.passwordError = self._form.children.passwordError;
-        self.loginError = self._form.children.loginError;
+        }).bind(this);
+        this._form.children.login.onblur = (function () { this.validateLogin(); }).bind(this);
+        this.emailError = this._form.children.emailError;
+        this.passwordError = this._form.children.passwordError;
+        this.loginError = this._form.children.loginError;
     }
 
     validateEmail() {
-        const self = this;
-        if (self._form.elements.email.value.search(/.+@.+\..+/) === -1) {
-            self.emailError.innerHTML = 'Пожалуйста, проверьте правильность e-mail';
-            self.emailError.style.display = 'block';
+        if (this._form.elements.email.value.search(/.+@.+\..+/) === -1) {
+            this.emailError.innerHTML = 'Пожалуйста, проверьте правильность e-mail';
+            this.emailError.style.display = 'block';
             return false;
         }
-        self.emailError.hidden = true;
-        self.emailError.innerHTML = '';
+        this.emailError.hidden = true;
+        this.emailError.innerHTML = '';
         return true;
     }
 
     validatePassword() {
-        const self = this;
-        if (self._form.elements.password.value.length < 1) {
-            self.passwordError.innerHTML = 'Пожалуйста, введите пароль!';
-            self.passwordError.hidden = false;
+        if (this._form.elements.password.value.length < 1) {
+            this.passwordError.innerHTML = 'Пожалуйста, введите пароль!';
+            this.passwordError.hidden = false;
             return false;
         }
-        if (self._form.elements.password.value.length < 8) {
-            self.passwordError.innerHTML = 'Пароль нужен длиннее 8 символов =(';
-            self.passwordError.hidden = false;
+        if (this._form.elements.password.value.length < 8) {
+            this.passwordError.innerHTML = 'Пароль нужен длиннее 8 символов =(';
+            this.passwordError.hidden = false;
             return false;
         }
-        if (self._form.elements.password2.value.length > 0
-            && self._form.elements.password.value != self._form.elements.password2.value) {
-            self._form.children.passwordError.innerHTML = 'Пароли не совпадают!';
-            self.passwordError.hidden = false;
+        if (this._form.elements.password2.value.length > 0
+            && this._form.elements.password.value != this._form.elements.password2.value) {
+            this._form.children.passwordError.innerHTML = 'Пароли не совпадают!';
+            this.passwordError.hidden = false;
             return false;
         }
-        self.passwordError.innerHTML = '';
-        self.passwordError.hidden = true;
+        this.passwordError.innerHTML = '';
+        this.passwordError.hidden = true;
         return true;
     }
 
     validateLogin() {
-        const self = this;
-        if (self._form.elements.login.value.length < 1) {
-            self.loginError.innerHTML = 'Пожалуйста, введите кликуху!';
-            self.loginError.style.display = 'block';
+        if (this._form.elements.login.value.length < 1) {
+            this.loginError.innerHTML = 'Пожалуйста, введите кликуху!';
+            this.loginError.style.display = 'block';
             return false;
         }
-        self.loginError.hidden = true;
-        self.loginError.innerHTML = '';
+        this.loginError.hidden = true;
+        this.loginError.innerHTML = '';
         return true;
     }
 
     validate() {
-        const self = this;
-        return self.validateEmail(self) && self.validatePassword(self) && self.validateLogin(self);
+        return this.validateEmail(this) && this.validatePassword(this) && this.validateLogin(this);
     }
 
     register() {
-        const self = this;
-        if (!self.validate()) {
+        if (!this.validate()) {
             return;
         }
         const user = new UserModel({
-            username: self._form.elements.login.value,
-            email: self._form.elements.email.value,
-            password: self._form.elements.password.value,
+            username: this._form.elements.login.value,
+            email: this._form.elements.email.value,
+            password: this._form.elements.password.value,
         });
 
         const response = user.save();
-        self._form.children.emailError.textContent = user.getEmailError();
-        self._form.children.passwordError.textContent = user.getPasswordError();
-        self._form.children.loginError.textContent = user.getLoginError();
-        self._form.children.emailError.hidden = self._form.children.emailError.textContent ? false : true;
-        self._form.children.loginError.hidden = self._form.children.loginError.textContent ? false : true;
-        self._form.children.passwordError.hidden = self._form.children.passwordError.textContent ? false : true;
+        this._form.children.emailError.textContent = user.getEmailError();
+        this._form.children.passwordError.textContent = user.getPasswordError();
+        this._form.children.loginError.textContent = user.getLoginError();
+        this._form.children.emailError.hidden = this._form.children.emailError.textContent ? false : true;
+        this._form.children.loginError.hidden = this._form.children.loginError.textContent ? false : true;
+        this._form.children.passwordError.hidden = this._form.children.passwordError.textContent ? false : true;
         if (response.status === 200) {
-            self.router.go('/rooms');
+            this.router.go('/rooms');
         } else {
             console.log('some server magic error');
-            self._form.children.emailError.textContent = user.getEmailError();
-            self._form.children.emailError.textContent = 'То ли e-mail, то ли пароль не подходят. Я так и не понял логику сервака';
-            self._form.children.emailError.hidden = false;
+            this._form.children.emailError.textContent = user.getEmailError();
+            this._form.children.emailError.textContent = 'То ли e-mail, то ли пароль не подходят. Я так и не понял логику сервака';
+            this._form.children.emailError.hidden = false;
         }
     }
 }

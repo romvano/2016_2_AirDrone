@@ -1,23 +1,19 @@
+import RoomModel from '../models/RoomModel';
+
 export default class RoomCollection {
     constructor() {
         this._data = [];
     }
 
     fetch() {
-        const self = this;
         return fetch('/games').then(response => {
             if (response.status !== 200) {
                 reject(response);
             }
             return response.json();
         }).then(data => {
-            self._data = data;
-            self.sort();
+            this._data = data;
         }).catch();
-    }
-
-    sort() {
-        this._data.sort((a, b) => a.drones.length - b.drones.length);
     }
 
     getCollection() {

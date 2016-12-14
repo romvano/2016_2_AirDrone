@@ -14,36 +14,33 @@ export default class UserModel {
     }
 
     validateLogin () {
-        const self = this;
-        if (self.username.length < 1) {
-            self.loginError = 'Пожалуйста, введите кликуху!';
+        if (this.username.length < 1) {
+            this.loginError = 'Пожалуйста, введите кликуху!';
             return false;
         }
-        self.loginError = '';
+        this.loginError = '';
         return true;
     }
 
     validatePassword() {
-        const self = this;
-        if (self.password.length < 1) {
-            self.passwordError = 'Пожалуйста, введите пароль!';
+        if (this.password.length < 1) {
+            this.passwordError = 'Пожалуйста, введите пароль!';
             return false;
         }
-        if (self.password.length < 8) {
-            self.passwordError = 'Пароль нужен длиннее 8 символов =(';
+        if (this.password.length < 8) {
+            this.passwordError = 'Пароль нужен длиннее 8 символов =(';
             return false;
         }
-        self.passwordError = '';
+        this.passwordError = '';
         return true;
     }
 
     validateEmail() {
-        const self = this;
-        if (self.email.search(/.+@.+\..+/) === -1) {
-            self.emailError = 'Пожалуйста, проверьте правильность e-mail';
+        if (this.email.search(/.+@.+\..+/) === -1) {
+            this.emailError = 'Пожалуйста, проверьте правильность e-mail';
             return false;
         }
-        self.emailError = '';
+        this.emailError = '';
         return true;
     }
 
@@ -65,24 +62,23 @@ export default class UserModel {
     }
 
     save () {
-        const self = this;
         const data = {
-            username: self.username,
-            email: self.email,
-            password: self.password,
-            games: self.games,
-            score: self.score,
+            username: this.username,
+            email: this.email,
+            password: this.password,
+            games: this.games,
+            score: this.score,
         };
-        if (!self.validate()) {
+        if (!this.validate()) {
             return null;
         }
         const response = request('https://air-drone.herokuapp.com/user', 'POST', data);
         switch (response.status) {
             case 400:
-            case 403: self.emailError = 'Пользователь с таким адресом уже летает!';
-                      self.passwordError = '';
+            case 403: this.emailError = 'Пользователь с таким адресом уже летает!';
+                      this.passwordError = '';
                       break;
-            case 200: self.emailError = self.passwordError = self.loginError = '';
+            case 200: this.emailError = this.passwordError = this.loginError = '';
                       break;
             default: console.log('Что-то не так, но не 400');
         }
@@ -94,22 +90,21 @@ export default class UserModel {
     }
 
     login () {
-        const self = this;
         const data = {
-            email: self.email,
-            password: self.password,
+            email: this.email,
+            password: this.password,
         };
         const response = request('https://air-drone.herokuapp.com/session', 'POST', data);
         console.log(response.status)
         switch (response.status) {
             case 400:
-            case 403: self.emailError = 'Неверный логин или пароль!';
-                      self.passwordError = '';
+            case 403: this.emailError = 'Неверный логин или пароль!';
+                      this.passwordError = '';
                       break;
-            case 200: self.emailError = self.passwordError = self.loginError = '';
-                      self.username = response.response.username; // Когда не будет работать, ошибку искать здесь.
-                      self.score = response.response.score;
-                      self.games = response.response.games;
+            case 200: this.emailError = this.passwordError = this.loginError = '';
+                      this.username = response.response.username; // Когда не будет работать, ошибку искать здесь.
+                      this.score = response.response.score;
+                      this.games = response.response.games;
                       break;
             default: console.log('Что-то не так, но не 400');
         }

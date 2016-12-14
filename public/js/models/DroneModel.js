@@ -8,9 +8,8 @@ export default class RoomModel {
     }
 
     save(room) {
-        self = this;
         if (!room) {
-            self.error = 'No room!';
+            this.error = 'No room!';
             return;
         }
         return fetch('/games', {
@@ -18,10 +17,10 @@ export default class RoomModel {
             body: JSON.stringify({
                 room: room,
                 drone: {
-                    id: self.id,
-                    color: self.color,
-                    playerLogin: self.playerLogin,
-                    playerId: self.playerId,
+                    id: this.id,
+                    color: this.color,
+                    playerLogin: this.playerLogin,
+                    playerId: this.playerId,
                 },
             })
         }).then(response => {
@@ -30,9 +29,9 @@ export default class RoomModel {
             }
             return response.json();
         }).then(data => {
-            self.error = '';
+            this.error = '';
         }).catch(() => {
-            self.error = 'Failed to save drone!';
+            this.error = 'Failed to save drone!';
         });
     }
 }

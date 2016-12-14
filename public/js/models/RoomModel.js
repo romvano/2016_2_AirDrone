@@ -11,10 +11,9 @@ export default class RoomModel {
     }
 
     fetch() {
-        const self = this;
         return fetch('/room', {
             body: JSON.stringify({
-                room: self.id,
+                room: this.id,
             })
         }).then(response => {
             if (response.status !== 200) {
@@ -22,39 +21,38 @@ export default class RoomModel {
             }
             return response.json();
         }).then(data => {
-            self.id = data.id;
-            self.name = data.name;
-            self.ip = data.ip;
-            self.drones = data.drones;
-            self.endCondition = data.endCondition;
-            self.endValue = data.endValue;
-            self.availableColors = data.availableColors;
-            self.error = 0;
+            this.id = data.id;
+            this.name = data.name;
+            this.ip = data.ip;
+            this.drones = data.drones;
+            this.endCondition = data.endCondition;
+            this.endValue = data.endValue;
+            this.availableColors = data.availableColors;
+            this.error = 0;
         }).catch(() => {
-            self.error = 'Wrong room name';
+            this.error = 'Wrong room name';
         });
     }
 
     save() {
-        self = this;
         return fetch('/room', {
             method: 'POST',
             body: JSON.stringify({
-                name: self.name,
-                ip: self.ip,
+                name: this.name,
+                ip: this.ip,
                 drones: [],
-                endCondition: self.endCondition,
-                endValue: self.endValue,
+                endCondition: this.endCondition,
+                endValue: this.endValue,
             }).then(response => {
                 if (response.status !== 200) {
                     reject(response);
                 }
                 return response.json();
             }).then(data => {
-                self.error = '';
+                this.error = '';
             }).catch(() => {
-                self.error = 'Duplicated rooms!';
-            });
+                this.error = 'Duplicated rooms!';
+            })
         });
     }
 

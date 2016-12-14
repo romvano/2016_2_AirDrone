@@ -8,68 +8,63 @@ export default class LoginView extends View {
     }
 
     render() {
-        const self = this;
-        self._el.innerHTML = template(self.data);
-        self._form = self._el.querySelector('.js-login-form');
-        self._form.onsubmit = function () { self.login(); return false; }
-        self._form.children.email.onblur = function () { self.validateEmail(); }
-        self._form.children.password.onblur = function () { self.validatePassword(); }
-        self._form.children.password.onkeyup = function (e) { 
+        this._el.innerHTML = template(this.data);
+        this._form = this._el.querySelector('.js-login-form');
+        this._form.onsubmit = (function () { this.login(); return false; }).bind(this);
+        this._form.children.email.onblur = (function () { this.validateEmail(); }).bind(this);
+        this._form.children.password.onblur = (function () { this.validatePassword(); }).bind(this);
+        this._form.children.password.onkeyup = (function (e) { 
             if (e.keyCode !== 8 && e.keyCode !== 9) {
-                self.validatePassword();
+                this.validatePassword();
             }
-        }
-        self._form.children.registration.onclick = function () { self.router.go('/registration'); }
-        self.emailError = self._form.children.emailError;
-        self.passwordError = self._form.children.passwordError;
+        }).bind(this);
+        this._form.children.registration.onclick = (function () { this.router.go('/registration'); }).bind(this);
+        this.emailError = this._form.children.emailError;
+        this.passwordError = this._form.children.passwordError;
     }
 
     validateEmail() {
-        const self = this;
-        if (self._form.elements.email.value.search(/.@./) === -1) {
-            self.emailError.hidden = false;
-            self.emailError.innerHTML = 'Пожалуйста, проверьте правильность e-mail!';
+        if (this._form.elements.email.value.search(/.@./) === -1) {
+            this.emailError.hidden = false;
+            this.emailError.innerHTML = 'Пожалуйста, проверьте правильность e-mail!';
             return false;
         }
-        self.emailError.hidden = true;
-        self.emailError.innerHTML = '';
+        this.emailError.hidden = true;
+        this.emailError.innerHTML = '';
         return true;
     }
 
     validatePassword() {
-        const self = this;
-        if (self._form.elements.password.value.length < 1) {
-            self.passwordError.hidden = false;
-            self.passwordError.innerHTML = 'Пожалуйста, введите пароль!';
+        if (this._form.elements.password.value.length < 1) {
+            this.passwordError.hidden = false;
+            this.passwordError.innerHTML = 'Пожалуйста, введите пароль!';
             return false;
         }
-        self.passwordError.hidden = true;
-        self.passwordError.innerHTML = '';
+        this.passwordError.hidden = true;
+        this.passwordError.innerHTML = '';
         return true;
     }
 
     validate() {
-        const self = this;
-        return self.validateEmail() && self.validatePassword();
+        return this.validateEmail() && this.validatePassword();
     }
 
     login() {
-        const self = this;
-        if (!self.validate()) {
+        if (!this.validate()) {
             return;
         }
         const user = new UserModel({
-            email: self._form.elements.email.value,
-            password: self._form.elements.password.value,
+            email: this._form.elements.email.value,
+            password: this._form.elements.password.value,
         });
 
         const response = user.login();
-        self._form.children.emailError.innerHTML = user.getEmailError();
-        self._form.children.passwordError.innerHTML = user.getPasswordError();
-        self._form.children.emailError.hidden = self._form.children.emailError.innerHTML ? false : true;
-        self._form.children.passwordError.hidden = self._form.children.passwordError.innerHTML ? false : true;
+        this._form.children.emailError.innerHTML = user.getEmailError();
+        this._form.children.passwordError.innerHTML = user.getPasswordError();
+        this._form.children.emailError.hidden = this._form.children.emailError.innerHTML ? false : true;
+        this._form.children.passwordError.hidden = this._form.children.passwordError.innerHTML ? false : true;
         if (response.status == 200) {
-            self.router.go('/rooms');
+            this.router.go('/rooms');
         }
     }
 }

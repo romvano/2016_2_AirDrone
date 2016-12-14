@@ -4,17 +4,14 @@ export default class UserCollection {
     }
 
     fetch() {
-        const self = this;
         return fetch('/rating').then(response => {
-                console.log('promise');
                     if (response.status !== 200) {
                         reject(response);
                     }
                     return response.json();
                 }).then(data => {
-                    self._data = data;
-                    self.sort();
-                    console.log('then', self._data);
+                    this._data = data;
+                    this.sort();
                 }).catch();
     }
 

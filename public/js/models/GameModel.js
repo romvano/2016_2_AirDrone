@@ -6,17 +6,16 @@ export default class GameModel {
     }
 
     getHost () {
-        const self = this;
         return fetch('/host').then(response => {
             if (response.status !== 200) {
                 response(reject);
             }
             return response.json();
         }).then(data => {
-            self.host = data.host;
-            self.error = '';
+            this.host = data.host;
+            this.error = '';
         }).catch(() => {
-            self.error = `Can't reach the host ${self.host}!`;
+            this.error = `Can't reach the host ${this.host}!`;
         });
     }
 

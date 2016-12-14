@@ -10,8 +10,7 @@ export default class GameView extends View {
     }
 
     render () {
-        const self = this;
-        self._el.innerHTML = template({ source: self._game.getVideo() });
+        this._el.innerHTML = template({ source: this._game.getVideo() });
         gameCanvas();
     }
 }
