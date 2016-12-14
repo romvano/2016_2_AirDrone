@@ -2,3 +2,5 @@ node_modules/
 public/coverage/
 public/api/
 *.log
+.idea/**/*
+.sass-cache/**/*
