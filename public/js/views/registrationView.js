@@ -38,7 +38,7 @@ export default class RegistrationView extends View {
             self.emailError.style.display = 'block';
             return false;
         }
-        self.emailError.style.display = 'none';
+        self.emailError.hidden = true;
         self.emailError.innerHTML = '';
         return true;
     }
@@ -73,7 +73,7 @@ export default class RegistrationView extends View {
             self.loginError.style.display = 'block';
             return false;
         }
-        self.loginError.style.display = 'none';
+        self.loginError.hidden = true;
         self.loginError.innerHTML = '';
         return true;
     }
@@ -101,8 +101,13 @@ export default class RegistrationView extends View {
         self._form.children.emailError.hidden = self._form.children.emailError.textContent ? false : true;
         self._form.children.loginError.hidden = self._form.children.loginError.textContent ? false : true;
         self._form.children.passwordError.hidden = self._form.children.passwordError.textContent ? false : true;
-        if (response.status == 200) {
+        if (response.status === 200) {
             self.router.go('/rooms');
+        } else {
+            console.log('some server magic error');
+            self._form.children.emailError.textContent = user.getEmailError();
+            self._form.children.emailError.textContent = 'То ли e-mail, то ли пароль не подходят. Я так и не понял логику сервака';
+            self._form.children.emailError.hidden = false;
         }
     }
 }
