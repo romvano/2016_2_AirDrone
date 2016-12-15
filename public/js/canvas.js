@@ -83,13 +83,13 @@ export default function gameCanvas(mode = 0) {
      */
     function createExplosion(x, y, color)
     {
-        let minSize = 8;
-        let maxSize = 30;
-        let count = 15;
-        let minSpeed = 80.0;
-        let maxSpeed = 220.0;
-        let minScaleSpeed = 1.0;
-        let maxScaleSpeed = 2.0;
+        const minSize = 8;
+        const maxSize = 30;
+        const count = 15;
+        const minSpeed = 80.0;
+        const maxSpeed = 220.0;
+        const minScaleSpeed = 1.0;
+        const maxScaleSpeed = 2.0;
         
         
         for (let angle=0; angle<360; angle += Math.round(360/count))
@@ -174,7 +174,7 @@ export default function gameCanvas(mode = 0) {
                         context2D.fillText("Вы подбиты!", rectSize + rectSize * 0.5, marginY + alertMargin + 0.3 * alertSize, alertSize);
                         context2D.font='20px Helvetica';
                         context2D.fillText("Ограничение действует:", rectSize + rectSize * 0.5, marginY + alertMargin + 0.5 * alertSize, alertSize);
-                        seconds = 10 - ((new Date()).getTime() - startTime) / 1000;
+                        let seconds = 10 - ((new Date()).getTime() - startTime) / 1000;
                         seconds = parseInt(seconds);
                         context2D.fillText(seconds + " секунд", rectSize + rectSize * 0.5, marginY + alertMargin + 0.6 * alertSize, alertSize);
                         if(seconds <= 0)
@@ -187,8 +187,6 @@ export default function gameCanvas(mode = 0) {
                     {
                         startTime = (new Date()).getTime();
                     }
-    //                alert();
-    //                mode = 0;
                 }
                 break;
         }

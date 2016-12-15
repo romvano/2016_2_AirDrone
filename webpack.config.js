@@ -45,7 +45,7 @@ module.exports = {
 			},
 			{
 				test: /\/sw.js$/,
-				loader: `file?name=${path.join('..', 'index', '[name].[hash].js')}&publicPath=/&outputPath=/`
+				loader: `file?name=${path.join('..', 'index', '[name].js')}&publicPath=/&outputPath=/`
 			}
 		]
 	},

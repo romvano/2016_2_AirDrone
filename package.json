@@ -27,6 +27,7 @@
     "babel-preset-es2016": "^6.16.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
+    "fetch-retry": "^1.0.3",
     "json-schema-mock": "0.0.8",
     "techno-gendoc": "0.4.1",
     "technolibs": "1.1.*",
