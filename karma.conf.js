@@ -1,8 +1,8 @@
-const webpackConfig = require('./karma.webpack.config.js');
+let webpackConfig = require('./karma.webpack.config.js');
 
 module.exports = function (config) {
 	'use strict';
-	const configuration = {
+	let configuration = {
 
 		basePath: '',
 
