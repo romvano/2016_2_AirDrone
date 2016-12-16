@@ -4,6 +4,7 @@ export default class DroneModel {
         this.color = data.color || undefined;
         this.playerLogin = data.playerLogin;
         this.playerEmail = data.playerEmail;
+        this.host = data.host;
         this.error = '';
     }
 

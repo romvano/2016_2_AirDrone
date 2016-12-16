@@ -47,10 +47,9 @@ export default class View {
 	 * @param {Object} [options={}] - Объект с параметрами
 	 */
 	show(options = {}) {
-        const self = this;
-		self._el.hidden = false;
-        if (self.bodyClass) {
-            document.body.classList.add(self.bodyClass);
+		this._el.hidden = false;
+        if (this.bodyClass) {
+            document.body.classList.add(this.bodyClass);
         }
 	}
 
@@ -59,10 +58,9 @@ export default class View {
 	 * @param {Object} [options={}] - Объект с параметрами
 	 */
 	hide(options = {}) {
-        const self = this;
-		self._el.hidden = true;
-        if (self.bodyClass) {
-            document.body.classList.remove(self.bodyClass);
+		this._el.hidden = true;
+        if (this.bodyClass) {
+            document.body.classList.remove(this.bodyClass);
         }
 	}
 
