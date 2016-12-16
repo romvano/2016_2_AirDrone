@@ -1,6 +1,7 @@
 import View from '../modules/view';
 import UserModel from '../models/UserModel';
 import template from '../../templates/login.tmpl.xml';
+const cookie = require('js-cookie');
 
 export default class LoginView extends View {
     constructor () {
@@ -8,6 +9,10 @@ export default class LoginView extends View {
     }
 
     render() {
+        if (cookie.get('airdroneEmail')) {
+            this.router.go('/rooms');
+            return;
+        }
         this._el.innerHTML = template(this.data);
         this._form = this._el.querySelector('.js-login-form');
         this._form.onsubmit = (function () { this.login(); return false; }).bind(this);

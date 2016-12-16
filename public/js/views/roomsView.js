@@ -3,17 +3,23 @@ import View from '../modules/view';
 import RoomCollection from '../collections/RoomCollection';
 import DroneModel from '../models/DroneModel';
 import template from '../../templates/rooms.tmpl.xml';
+const cookie = require('js-cookie');
 
 export default class RoomsView extends View {
     constructor (data = {}) {
         super({ element: '.js-rooms', bodyClass: 'body-rooms' });
         this.roomCollection = new RoomCollection();
-        this.drone = new DroneModel();
+        this.drone = new DroneModel({ playerEmail: cookie.get('airdroneEmail') });
         this.selectedRoom = undefined;
     }
 
     render () {
         this.roomCollection.fetch().then(() => {
+        if (!cookie.get('airdroneEmail')) {
+            this.router.go('/');
+            return;
+        }
+            console.log('roomCollection fetch began');
             this._el.innerHTML = template(this.roomCollection.getCollection());
 
             this.error = this._el.querySelector('.js-error');
@@ -85,7 +91,7 @@ export default class RoomsView extends View {
 
     back (details) {
         details.hidden = true;
-        for (const r of this.rooms) {
+        for (r of this.rooms) {
             r.hidden = false;
         }
         this.selectedRoom = undefined;

@@ -1,9 +1,9 @@
-export default class RoomModel {
+export default class DroneModel {
     constructor(data = {}) {
         this.id = data.id || 0;
         this.color = data.color || undefined;
-        this.playerLogin = data.playerLogin || 'New Player';
-        this.playerId = data.playerId || 0;
+        this.playerLogin = data.playerLogin;
+        this.playerEmail = data.playerEmail;
         this.error = '';
     }
 
@@ -20,7 +20,7 @@ export default class RoomModel {
                     id: this.id,
                     color: this.color,
                     playerLogin: this.playerLogin,
-                    playerId: this.playerId,
+                    playerEmail: this.playerEmail,
                 },
             })
         }).then(response => {

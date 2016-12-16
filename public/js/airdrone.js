@@ -1,3 +1,4 @@
+const cookie = require('js-cookie');
 import Router from './modules/router';
 import LoginView from './views/loginView';
 import RegistrationView from './views/registrationView';

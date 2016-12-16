@@ -1,4 +1,5 @@
 import request from '../libs';
+const cookie = require('js-cookie');
 
 export default class UserModel {
     constructor(data = {}) {
@@ -79,6 +80,8 @@ export default class UserModel {
                       this.passwordError = '';
                       break;
             case 200: this.emailError = this.passwordError = this.loginError = '';
+                      cookie.remove('airdroneEmail');
+                      cookie.set('airdroneEmail', data.email);
                       break;
             default: console.log('Что-то не так, но не 400');
         }
@@ -105,6 +108,8 @@ export default class UserModel {
                       this.username = response.response.username; // Когда не будет работать, ошибку искать здесь.
                       this.score = response.response.score;
                       this.games = response.response.games;
+                      cookie.remove('airdroneEmail');
+                      cookie.set('airdroneEmail', data.email);
                       break;
             default: console.log('Что-то не так, но не 400');
         }

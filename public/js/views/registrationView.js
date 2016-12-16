@@ -1,6 +1,7 @@
 import View from '../modules/view';
 import UserModel from '../models/UserModel';
 import template from '../../templates/registration.tmpl.xml';
+const cookie = require('js-cookie');
 
 export default class RegistrationView extends View {
     constructor (options = {}) {
@@ -8,6 +9,10 @@ export default class RegistrationView extends View {
     }
 
     render() {
+        if (cookie.get('airdroneEmail')) {
+            this.router.go('/rooms');
+            return;
+        }
         this._el.innerHTML = template(this.data);
         this._form = this._el.querySelector('.js-registration-form');
         this._form.onsubmit = (function () { this.register(); return false; }).bind(this);

@@ -1,3 +1,5 @@
+const cookie = require('js-cookie');
+
 export default class UserCollection {
     construtor() {
         this._data = [];

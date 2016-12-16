@@ -8,7 +8,7 @@ export default class GameModel {
     getHost () {
         return fetch('/host').then(response => {
             if (response.status !== 200) {
-                response(reject);
+                return undefined;
             }
             return response.json();
         }).then(data => {

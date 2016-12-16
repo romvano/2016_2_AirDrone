@@ -3,6 +3,7 @@ import template from '../../templates/game.tmpl.xml';
 import GameModel from '../models/GameModel';
 import gameCanvas from '../canvas';
 const fetchRetry = require('fetch-retry');
+const cookie = require('js-cookie');
 
 export default class GameView extends View {
     constructor (data = {}) {
@@ -11,7 +12,11 @@ export default class GameView extends View {
     }
 
     render () {
-        this._el.innerHTML = template({ source: this._game.getVideo() });
+       if (!cookie.get('airdroneEmail')) {
+           this.router.go('/');
+           return;
+       }
+       this._el.innerHTML = template({ source: this._game.getVideo() });
         // check the connection:
         fetchRetry('https://air-drone.herokuapp.com/user', {
             retries: 10,

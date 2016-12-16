@@ -1,4 +1,5 @@
-export default function gameCanvas(mode = 0) {
+export default function gameCanvas() {
+    window.mode = 0;
     let particles = [];
     
     // canvas and 2D context initialization
@@ -139,7 +140,7 @@ export default function gameCanvas(mode = 0) {
         // draw aiming window
         drawStatus(0.5 * rectSize, 0.1 * rectSize, marginY - rectSize * 0.1 - 5, "#4d4d4d", "Зона захвата", 1, 10);
         roundRect(context2D, rectSize, marginY, rectSize, rectSize, 20, "red", false);
-        switch (mode)
+        switch (window.mode)
         {
             case 1:
                 drawStatus(rectSize, 0.2 * 0.7 * rectSize, statusMargin, "green", "Захват цели...", status, 20);
@@ -152,7 +153,7 @@ export default function gameCanvas(mode = 0) {
                     createExplosion(x, y, "#FFA318");
                     createExplosion(x, y, "#525252");
                     createExplosion(x, y, "#FFA318");
-                    mode = 0;
+                    window.mode = 0;
                 }
                 break;
             case 2:
@@ -179,7 +180,7 @@ export default function gameCanvas(mode = 0) {
                         context2D.fillText(seconds + " секунд", rectSize + rectSize * 0.5, marginY + alertMargin + 0.6 * alertSize, alertSize);
                         if(seconds <= 0)
                         {
-                            mode = 0;
+                            window.mode = 0;
                             startTime = 0;
                         }
                     }
@@ -251,20 +252,33 @@ export default function gameCanvas(mode = 0) {
     
     //Чтобы запустить анимации нужно просто выставить нужный mode
     //и обнулить переменную прогресс бара
+    //
+
+    window.mode1 = function () {
+        window.mode = 1;
+        status = parseFloat(0.0);
+    }
+    window.mode2 = function () {
+        window.mode = 2;
+        status= parseFloat(0.0);
+    }
+
     window.onkeydown = function(evt)
     {
         evt = evt || window.event;
         //Квадракоптер под ударом
         if (evt.keyCode == 90)
         {
-            mode = 1;
-            status = parseFloat(0.0);
+//            window.mode = 1;
+//            status = parseFloat(0.0);
+            window.mode1();
         }
         //Захват противника
         else if (evt.keyCode == 88)
         {
-            mode = 2;
-            status = parseFloat(0.0);
+//            window.mode = 2;
+//            status = parseFloat(0.0);
+            window.mode2();
         }
     };
 }
