@@ -1,5 +1,3 @@
-import GameModel from '../../../public/js/models/GameModel.js';
-
 (function () {
     'use strict';
 

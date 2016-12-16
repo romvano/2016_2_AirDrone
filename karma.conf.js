@@ -12,8 +12,8 @@ module.exports = function (config) {
 		frameworks: ['jasmine'],
 
 		files: [
-			'./public/js/models/GameModel.js',
-			'./test/js/models/GameModel.spec.js'
+			'./public/js/**/*.js',
+			'./test/js/**/*.spec.js'
 		],
 
         exclude: [
@@ -35,7 +35,6 @@ module.exports = function (config) {
 		logLevel: config.LOG_INFO,
 		plugins: [
 			'karma-jasmine',
-            'karma-babel-preprocessor',
 			'karma-chrome-launcher',
 			'karma-coverage',
 			'karma-webpack',
